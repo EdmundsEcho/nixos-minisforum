@@ -62,7 +62,7 @@
     # keyfile — see NixOS wiki on `luks.devices.<name>.keyFile`).
     luks.devices = {
       "root-crypt" = {
-        device = "/dev/disk/by-uuid/53764069-2ad2-4588-a516-d0882d90f1cd";
+        device = "/dev/disk/by-uuid/4ed5b875-a800-4b82-9bfe-fd7ce9110394";
         allowDiscards = true;
       };
       "home-crypt" = {
