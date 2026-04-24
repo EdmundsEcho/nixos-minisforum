@@ -144,16 +144,22 @@
   # ──────────────────────────────────────────────────────────────
   users.mutableUsers = true;   # allow `passwd` to change the password later
 
+  users.groups.staff = {
+    gid = 15000;
+  };
+  
   users.users.ecape = {
     isNormalUser = true;
+    uid = 11040;                    # NEW — match the on-disk ownership
     description = "Edmund Cape";
     home = "/home/users/ecape";
+    group = "staff";               # NEW — primary group matches on-disk gid 15000
     shell = pkgs.nushell;
     extraGroups = [ "wheel" "networkmanager" "docker" "video" ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKU5mhYXhZxIraRw6HxApHFRJwzQwvFmUv9M5hkwYGOX edmundsecho-personal@nixos"
     ];
-    initialPassword = "changeme";   # run `passwd` on first login
+    initialPassword = "changeme";
   };
 
   security.sudo.wheelNeedsPassword = false;   # matches your current setup
