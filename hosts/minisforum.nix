@@ -147,7 +147,7 @@
   users.users.ecape = {
     isNormalUser = true;
     description = "Edmund Cape";
-    home = "/home/ecape";
+    home = "/home/users/ecape";
     shell = pkgs.nushell;
     extraGroups = [ "wheel" "networkmanager" "docker" "video" ];
     openssh.authorizedKeys.keys = [
