@@ -144,10 +144,10 @@
   # ──────────────────────────────────────────────────────────────
   users.mutableUsers = true;   # allow `passwd` to change the password later
 
-  users.users.edmund = {
+  users.users.ecape = {
     isNormalUser = true;
     description = "Edmund Cape";
-    home = "/home/edmund";
+    home = "/home/ecape";
     shell = pkgs.nushell;
     extraGroups = [ "wheel" "networkmanager" "docker" "video" ];
     openssh.authorizedKeys.keys = [
