@@ -142,6 +142,7 @@
   # ──────────────────────────────────────────────────────────────
   networking = {
     hostName = "minisforum";
+    nameservers = [ "1.1.1.1" "9.9.9.9" ];
     networkmanager.enable = true;
     # Tailscale is on the tailnet interface; only SSH exposed on the LAN.
     firewall = {
@@ -152,7 +153,7 @@
     };
   };
 
-  nameservers = [ "1.1.1.1" "9.9.9.9" ];
+  
 
   services.tailscale = {
     enable = true;
