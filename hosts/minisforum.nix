@@ -56,10 +56,37 @@
     systemd.enable = true;
     availableKernelModules = [
       "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"
+      "r8169"   # Realtek RTL8125 NIC driver — needed for in-initrd networking
     ];
 
-    # LUKS unlocking. Prompted for passphrase at boot (3 prompts, or use a
-    # keyfile — see NixOS wiki on `luks.devices.<name>.keyFile`).
+    # Bring up enp2s0 in initrd via systemd-networkd (DHCP)
+    systemd.network = {
+      enable = true;
+      networks."10-lan" = {
+        matchConfig.Name = "enp2s0";
+        networkConfig.DHCP = "yes";
+      };
+    };
+
+    # SSH server in initrd, listens BEFORE LUKS prompts so we can unlock headless.
+    # Per-reboot UX:
+    #   ssh -p 2222 root@192.168.0.13
+    #   systemd-tty-ask-password-agent --query
+    #   <type passphrase up to 3x — once per LUKS volume>
+    network = {
+      enable = true;
+      ssh = {
+        enable = true;
+        port = 2222;
+        hostKeys = [ "/etc/secrets/initrd/ssh_host_ed25519_key" ];
+        authorizedKeys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKU5mhYXhZxIraRw6HxApHFRJwzQwvFmUv9M5hkwYGOX edmundsecho-personal@nixos"
+        ];
+      };
+    };
+
+    # LUKS unlocking. Now answered via SSH-in-initrd; physical console still works
+    # as a fallback (monitor/keyboard).
     luks.devices = {
       "root-crypt" = {
         device = "/dev/disk/by-uuid/4ed5b875-a800-4b82-9bfe-fd7ce9110394";
