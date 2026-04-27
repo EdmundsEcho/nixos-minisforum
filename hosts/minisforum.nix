@@ -86,7 +86,7 @@
         port = 2222;
         hostKeys = [ "/etc/secrets/initrd/ssh_host_ed25519_key" ];
         authorizedKeys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKU5mhYXhZxIraRw6HxApHFRJwzQwvFmUv9M5hkwYGOX edmundsecho-personal@nixos"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGK/YwonprJCJPTxeCfQTlvE17a0kYVP7RjbxX47LYhP ecape@do-nix"
         ];
       };
     };
@@ -193,7 +193,7 @@
     shell = pkgs.nushell;
     extraGroups = [ "wheel" "networkmanager" "docker" "video" ];
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKU5mhYXhZxIraRw6HxApHFRJwzQwvFmUv9M5hkwYGOX edmundsecho-personal@nixos"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGK/YwonprJCJPTxeCfQTlvE17a0kYVP7RjbxX47LYhP ecape@do-nix"
     ];
     initialPassword = "changeme";
   };
