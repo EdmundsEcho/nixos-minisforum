@@ -18,7 +18,7 @@
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     ../modules/packages.nix
-    # ../modules/neovim        # TODO: nixvim schema drift; re-enable after rebase
+    ../modules/neovim        
   ];
 
   # ──────────────────────────────────────────────────────────────
