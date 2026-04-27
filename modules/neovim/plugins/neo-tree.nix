@@ -12,11 +12,10 @@
     nvim-window-picker
   ];
 
-  # Enable neo-tree but clear nixvim's settings
-  programs.nixvim.plugins.neo-tree = {
-    enable = true;
-    settings = lib.mkForce { };
-  };
+  # Enable neo-tree. The actual config is loaded from
+  # ~/.hewnix-ext/lua/neo-tree.lua via extraConfigLua below; we just need
+  # the plugin available. (`settings` was removed in nixvim 25.05.)
+  programs.nixvim.plugins.neo-tree.enable = true;
 
   # Load our config
   programs.nixvim.extraConfigLua = lib.mkAfter ''

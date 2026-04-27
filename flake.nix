@@ -4,10 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 
-    # nixvim = {
-    #   url = "github:nix-community/nixvim/nixos-25.05";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
@@ -15,12 +15,12 @@
     };
   };
 
-  outputs = { self, nixpkgs, rust-overlay, ... }: {
+  outputs = { self, nixpkgs, nixvim, rust-overlay, ... }: {
     nixosConfigurations.minisforum = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit rust-overlay; };
       modules = [
-        # nixvim.nixosModules.nixvim    # TODO: re-enable
+        nixvim.nixosModules.nixvim
         ./hosts/minisforum.nix
       ];
     };
