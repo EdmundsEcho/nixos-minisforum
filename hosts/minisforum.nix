@@ -59,12 +59,18 @@
       "r8169"   # Realtek RTL8125 NIC driver — needed for in-initrd networking
     ];
 
-    # Bring up enp2s0 in initrd via systemd-networkd (DHCP)
+    # Bring up enp2s0 in initrd via systemd-networkd with a STATIC IP.
+    # DHCP would use a different client identifier than post-boot NetworkManager
+    # and could be issued a different lease — making `ssh -p 2222 root@<ip>`
+    # unpredictable. Static at the LAN address the router has reserved for us.
     systemd.network = {
       enable = true;
       networks."10-lan" = {
         matchConfig.Name = "enp2s0";
-        networkConfig.DHCP = "yes";
+        networkConfig = {
+          Address = "192.168.0.13/24";
+          Gateway = "192.168.0.1";
+        };
       };
     };
 
