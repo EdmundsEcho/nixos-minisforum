@@ -31,6 +31,10 @@
     ripgrep
     nodejs_20
 
+    # C toolchain — Rust's default linker invokes `cc`
+    gcc
+    pkg-config
+
     # Rust (stable toolchain from rust-overlay; falls back to nixpkgs rustc
     # if the overlay isn't present)
     rust-bin.stable.latest.default
